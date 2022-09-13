@@ -1,7 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Restaurant {
     private String name;
@@ -62,4 +64,20 @@ public class Restaurant {
     public String getName() {
         return name;
     }
+
+    public int getOrderPrice(List<String> itemNames){
+        int orderPrice =0;
+        List<Item> items = this.getMenu();
+        Map<String,Item> itemMap = new HashMap<>();
+        for(Item item: items) {
+            itemMap.put(item.getName(),item);
+        }
+        for(String itemName: itemNames) {
+            if(itemMap.containsKey(itemName)) {
+                orderPrice += itemMap.get(itemName).getPrice();
+            }
+        }
+        return orderPrice;
+   
+	}
 }
